@@ -19,8 +19,8 @@ def calc_hash(filepath):
     with open(filepath, 'rb') as f:
         sha1obj = hashlib.sha1()
         sha1obj.update(f.read())
-        hash = sha1obj.hexdigest()
-        print("sha1:", hash)
+        sha1_hash = sha1obj.hexdigest()
+        print("sha1:", sha1_hash)
         bs = base64.encodebytes(sha1obj.digest())
         print("hash:", bs)
         return bs
@@ -30,9 +30,9 @@ def calc_md5(filepath):
     with open(filepath, 'rb') as f:
         md5obj = hashlib.md5()
         md5obj.update(f.read())
-        hash = md5obj.hexdigest()
-        print(hash)
-        return hash
+        md5_hash = md5obj.hexdigest()
+        print(md5_hash)
+        return md5_hash
 
 
 if __name__ == "__main__":
