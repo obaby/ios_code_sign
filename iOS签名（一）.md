@@ -79,7 +79,25 @@ ipa文件信息签名包括资源签名都位于Payload\EmojiUltimate.app\_CodeS
 
 看到这里，既然已经知道了计算方法，那么是不是可以修改文件，更新哈希值之后进行安装呢? 如果尝试以下你就会发现这条路行不通！为什么？哈希明明是对的？
 
-那是因为虽然当前文件的哈希是对的，但是由于文件内容变化，导致整个CodeResources文件的哈希值变了。而这个文件的哈希值则是记录在可执行文件的CodeDirectory下的。
+那是因为虽然当前文件的哈希是对的，但是由于文件内容变化，导致整个CodeResources文件的哈希值变了。而这个文件的哈希值则是记录在可执行文件的签名信息中的。
+
+通过jtool可以便捷查看对应的签名信息：
+![](screenshot/jtool.jpg)
+
+标记的地方就是CodeResources的哈希值，通过文中的python代码也可以快速的计算该文件的sha1，两者是一致的。
+![](screenshot/cr_hash.jpg)
+
+如果是新版本的ipa则还会有sha256的值。如下：
+![](screenshot/cr_sha256.jpg)
+
+这也就解释了，为什么下载的ipa是不能随便修改的，当然修改二进制文件最后的效果也是一样的，无法通过签名校验。
+
+虽然如此，还是有一部分文件是可以修改的，那就是SC-info以及目录下的相关文件。这些文件对应的是记录的ipa的购买信息，以及授权信息。那么如果用两个不同的账号购买下载同一款应用，替换内部的sc-info文件是可以正常安装运行的。
+
+至于为什么能通过签名校验，这个放在下一篇吧。
+
+苹果开源代码中，关于签名的代码： https://opensource.apple.com/source/Security/Security-55471/sec/Security/Tool/codesign.c.auto.html
+
 
 
 

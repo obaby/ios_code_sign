@@ -1,0 +1,136 @@
+{
+"actions": {
+"mobile://app.study.edu/categoryTwo": [
+"study.163.com/m/category/type2/:cid",
+"study.163.com/m/category/type3/:cid",
+"study.163.com/m/category/type-1/:cid",
+"study.163.com/category/:cid"
+],
+"mobile://app.study.edu/article": [
+"study.163.com/article/:articleId"
+],
+"mobile://app.study.edu/reader": [
+"study.163.com/reader/:readerId"
+],
+"mobile://app.study.edu/book": [
+"study.163.com/book/:bookId"
+],
+"mobile://app.study.edu/book-category": [
+"study.163.com/book-category/:cid"
+],
+"mobile://app.study.edu/column":[
+"study.163.com/column/:columnId"
+],
+"mobile://app.study.edu/bookReader": [
+"study.163.com/bookReader?bookId=bookId&readerId=readerId"
+],
+"mobile://app.study.edu/knowledgeList": [
+"study.163.com/knowledgeList/:id"
+],
+"mobile://app.study.edu/smartSpec": [
+"study.163.com/my/smartSpec/:id"
+],
+"mobile://app.study.edu/courseDetail2": [
+"course.study.163.com/:termId",
+"course.study.163.com/wap/:termId",
+"course.study.163.com/:termId/learning",
+"course.study.163.com/wap/:termId/learning",
+"course.study.163.com/:termId/learning#/m/:tab/frontList"
+],
+"mobile://app.study.edu/courseDetail2/notice": [
+"course.study.163.com/:termId/learning#/notice"
+],
+"mobile://app.study.edu/courseDetail2/exam": [
+"course.study.163.com/:termId/learning/exam/:examId"
+],
+"mobile://app.study.edu/unitPage": [
+"course.study.163.com/:termId/lecture-:unitId",
+"course.study.163.com/wap/:termId/lecture-:unitId",
+"course.study.163.com/wap/:termId/lecture-:unitId/live",
+"course.study.163.com/wap/:termId/lecture-:unitId/richtext"
+],
+"mobile://app.study.edu/yktDetail": [
+"study.163.com/course/introduction/:courseId.htm",
+"study.163.com/course/introduction.htm?courseId=courseId",
+"study.163.com/course/courseMain.htm?courseId=courseId",
+"study.163.com/course/courseLearn.htm?courseId=courseId",
+"study.163.com/course/courseLearn.htm?courseId=courseId&lessonId=lessonId",
+"study.163.com/course/introduction/:courseId.htm#/courseDetail",
+"study.163.com/course/introduction.htm?courseId=courseId#/courseDetail",
+"study.163.com/course/courseMain.htm?courseId=courseId&tab=tab"
+],
+"mobile://app.study.edu/yocDetail": [
+"study.163.com/yooc/courseLearn",
+"mooc.study.163.com/course/:courseId",
+"mooc.study.163.com/course/:courseId?tid=termId",
+"mooc.study.163.com/course/:courseId#/info",
+"mooc.study.163.com/course/:courseId?tid=termId#/info",
+"mooc.study.163.com/learn/:courseId?tid=termId",
+"mooc.study.163.com/learn/term/:termId.htm",
+"mooc.study.163.com/course/courseLearn.htm?termId=termId&unitId=unitId"
+],
+"mobile://app.study.edu/liveRoom": [
+"study.163.com/lessonlive/h5/:liveId.htm",
+"study.163.com/course/courselive/:liveId.htm",
+"study.163.com/live/learn/:liveId"
+],
+"mobile://app.study.edu/courseCenter": [
+"study.163.com/cloud/myCloudClass.htm",
+"study.163.com/my",
+"study.163.com/my#/courses"
+],
+"mobile://app.study.edu/microSpecial": [
+"mooc.study.163.com/smartSpec/detail/:microSepcialId.htm"
+],
+"mobile://app.study.edu/series": [
+"study.163.com/series/:seriesId.htm"
+],
+"mobile://app.study.edu/topic": [
+"study.163.com/topics/*"
+],
+"mobile://app.study.edu/blackList": [
+"ke.qq.com/*",
+"*.chuanke.com/*"
+],
+"mobile://app.study.edu/cofirmOrder": [
+"study.163.com/order/pay/:orderId.htm"
+],
+"mobile://app.study.edu/instructor": [
+"study.163.com/instructor/:id"
+],
+"mobile://app.study.edu/iapRecharge": [
+"study.163.com/iapRecharge?value=value"
+],
+"mobile://app.study.edu/coupon": [
+"study.163.com/coupon"
+],
+"mobile://app.study.edu/order/attentionGuide": [
+"study.163.com/order/attentionGuide"
+],
+"mobile://app.study.edu/order/paySuccess": [
+"study.163.com/order/paySuccess/:orderId"
+],
+"mobile://app.study.edu/message": [
+"study.163.com/myMessage.htm?tab=tab"
+],
+"mobile://app.study.edu/masters": [
+"study.163.com/masters"
+],
+"mobile://app.study.edu/promote": [
+"study.163.com/promoter/my"
+],
+"mobile://app.study.edu/user": [
+"study.163.com/user/:id.htm"
+],
+"mobile://app.study.edu/categoryGuide": [
+"study.163.com/category"
+],
+"mobile://app.study.edu/commentDetails": [
+"study.163.com/comment_details/:id.htm"
+],
+"mobile://app.study.edu/search": [
+"study.163.com/search"
+]
+},
+"versionCode": 14
+}

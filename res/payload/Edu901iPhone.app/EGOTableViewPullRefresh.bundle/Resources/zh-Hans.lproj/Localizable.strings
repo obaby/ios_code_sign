@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  TableViewPull
+
+  Created by user on 14-3-19.
+
+*/
+"egoPullRefreshViewLastUpdateTime" = "最后更新：%@";
+"egoPullRefreshViewReleaseToRefresh" = "松开即可刷新";
+"egoPullRefreshViewPullToRefresh" = "下拉可以刷新";
+"egoPullRefreshViewLoading" = "加载中...";

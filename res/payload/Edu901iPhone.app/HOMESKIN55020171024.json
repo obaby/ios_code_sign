@@ -1,0 +1,16 @@
+{
+	"id":"asdfghiedggds",
+	"home_tab":{
+        "statusbar_textcolor":"white",
+		"label_color":"0xFFFFFF",
+		"label_highlightColor":"0xffee2d",
+		"line_color":"0xffd800",
+		"background_image":"homeskin_top_background"
+	},
+	"home_bottom":{
+		"home_icon":"homeskin_tab-home",
+		"course_icon":"homeskin_tab-course",
+		"mystudy_icon":"homeskin_tab-mystudy",
+		"account_icon":"homeskin_tab-account"
+	}
+}

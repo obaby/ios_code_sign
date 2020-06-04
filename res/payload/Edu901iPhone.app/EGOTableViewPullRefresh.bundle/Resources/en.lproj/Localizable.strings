@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  TableViewPull
+
+  Created by user on 14-3-19.
+
+*/
+"egoPullRefreshViewLastUpdateTime" = "Last Updated: %@";
+"egoPullRefreshViewReleaseToRefresh" = "Release to refresh...";
+"egoPullRefreshViewPullToRefresh" = "Pull down to refresh...";
+"egoPullRefreshViewLoading" = "Loading...";

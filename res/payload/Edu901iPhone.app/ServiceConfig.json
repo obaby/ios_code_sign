@@ -1,0 +1,15 @@
+{
+    "services": [
+                 {
+                 "domain": "YixinBasicService",
+                 "exports": [
+                             {
+                             "showname": "hideOptionMenu",
+                             "realname": "hideOptionMenu",
+                             "level": 0
+                             },
+                             ],
+                 "islocal": true
+                 },
+                 ]
+}

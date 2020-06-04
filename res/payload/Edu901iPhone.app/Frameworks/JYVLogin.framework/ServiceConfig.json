@@ -1,0 +1,20 @@
+{
+    "services": [
+                     {
+                         "domain": "NELoginBridgeService",
+                         "exports": [
+                                         {
+                                         "showname": "close",
+                                         "realname": "close",
+                                         "level": 0
+                                         },
+                                         {
+                                         "showname": "selectTicket",
+                                         "realname": "selectTicket",
+                                         "level": 0
+                                         },
+                                     ],
+                         "islocal": true
+                     },
+                 ]
+}
