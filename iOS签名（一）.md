@@ -36,6 +36,11 @@ iOS的签名目的其实也比较纯粹，就是为了能够在不越狱的情�
  SC_info 目录结构：
  ![](screenshot/dir.jpg)
  关于ipa结构的文章可以看这个链接： https://blog.razb.me/pulling-apart-an-ios-app/  
+ 旧版的ipa在Frameworks目录下的支持库下并没有独立的SC_info
+ 新版的ipa在所有的库目录下都创建了SC_info， 具体是哪个版本变更的，由于长时间没有接触这个，我也不知道~~
+ 虽然存在多个文件，但是文件的内容是一样的，通过md5就可以比对出来了，当然现在md5碰撞比较容易实现了，但是参考一下还是可以的。
+ ![](screenshot/md5.jpg)
+ 
 3. 将授权文件，购买信息打包到ipa内。这个就是通过itunes最终下载到的ipa。现在最新的itunes已经没有应用商店了~~  
 
 ![](screenshot/sc-info.jpg)
