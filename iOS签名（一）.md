@@ -1,7 +1,7 @@
-iOS 签名（一）
+iOS 签名杂谈（一）
 ====
 
-为什么要说iOS的签名呢？现在移动平台的逆向的教程和书籍已经相当多了。针对签名的文章也很多，我这里想说的一些是可能别的地方看不到的。
+为什么要说iOS的签名呢？现在移动平台的逆向的教程和书籍已经相当多了。针对签名的文章也很多，我这里想说的一些是可能别的地方看不到的（虽然都是老黄历~~）。
 
 iOS的签名目的其实也比较纯粹，就是为了能够在不越狱的情况下安装破解版的ipa。当然，如果是各种助手的话还有另外的一个目的，那就是应用分发（更重要的是在分发之前加入自己的广告sdk）。
 
@@ -9,15 +9,34 @@ iOS的签名目的其实也比较纯粹，就是为了能够在不越狱的情�
 1. 苹果的应用商店。
 2. cydia应用商店。 需要越狱之后才能安装各种app和插件，并且由于现在越狱基本都是不完整越狱，重启设备之后需要重新越狱。并且越狱工具安装也异常麻烦，所以越狱的用户也少了很多
 3. 第三方应用商店，国内的比较大的就那么几家。不知道的可以自己搜索一下。
-第三方应用商店的app分发其实也经历了几个时期：
-a. 越狱时期，最早期应用商店分发的基本都是越狱应用。这个与早期的越狱插件和完美越狱存在比较大的关系。
-b. 转授权分发，这个技术最早貌似是360的快用用的这么一项技术。所谓转授权就是通过链接电脑，通过itunes的相关api调用在设备上创建IC-info文件。同样，通过苹果的应用商店下载的iap也会包含sc_info
+第三方应用商店的app分发其实也经历了几个时期：  
+- a. 越狱时期，最早期应用商店分发的基本都是越狱应用。这个与早期的越狱插件和完美越狱存在比较大的关系。  
+- b. 转授权分发，这个技术最早貌似是360的快用用的这么一项技术。所谓转授权就是通过链接电脑，通过itunes的相关api调用在设备上创建IC-info文件。通过苹果的应用商店下载的iap会包含sc_info
 授权信息。
-![](screenshot/ic-info.jpg)
 
-通过appstore下载ipa，早期的itunes通过两步进行的。1. 下载ipa文件，此时的文件是没有任何的授权信息的，就是加密后的ipa文件。2. 通过接口创建授权文件以及相关目录SC_Info，该目录位于ipa的Payload\EmojiUltimate.app 目录下。并且同时创建iTunesMetadata.plist文件
- 。该文件包含了ipa购买的apple id的相关信息。3. 将授权文件，购买信息打包到ipa内。
-这个就是通过itunes最终下载到的ipa。
+![](screenshot/ic-info.jpg)
+- c. 在ipa安装的过程中并不会校验设备上有没有授权信息，只有到运行的时候才会校验授权信息。此时如果没有授权 那么会弹出要求输入用户名和密码的弹框。
+![](screenshot/input_password.PNG)  
+- d. 如果要验证上面的内容。有个简单的做法，那就是删除设备上的授权文件。除了要删除上面的iTunes目录下的文件还要删除以下的文件。  
+![](screenshot/remove.jpg)  
+
+> /private/var/mobile/Library/FairPlay/iTunes_Control/iTunes/IC-Info.sidr  
+> /private/var/mobile/Library/FairPlay/iTunes_Control/iTunes/IC-Info.sids  
+> /private/var/mobile/Library/FairPlay/iTunes_Control/iTunes/IC-Info.sidt   
+> /private/var/mobile/Library/FairPlay/iTunes_Control/iTunes/IC-Info.sisb  
+> /private/var/mobile/Library/FairPlay/iTunes_Control/iTunes/IC-Info.sisv  
+> /private/var/mobile/Library/FairPlay/iTunes_Control/iTunes/IC-Info.sidb  
+
+/iTunes_Control/iTunes/iTunesControl 目录下的文件及时删除也不会影响应用的正常云信，并且在启动app之后下面的文件会进行重建。
+  
+通过appstore下载ipa，早期的itunes通过两步进行的。
+1. 下载ipa文件，此时的文件是没有任何的授权信息的，就是加密后的ipa文件。
+2. 通过接口创建授权文件以及相关目录SC_Info，该目录位于ipa的Payload\EmojiUltimate.app 目录下。并且同时创建iTunesMetadata.plist文件
+ 。该文件包含了ipa购买的apple id的相关信息。
+ SC_info 目录结构：
+ ![](screenshot/dir.jpg)
+ 关于ipa结构的文章可以看这个链接： https://blog.razb.me/pulling-apart-an-ios-app/  
+3. 将授权文件，购买信息打包到ipa内。这个就是通过itunes最终下载到的ipa。现在最新的itunes已经没有应用商店了~~  
 
 ![](screenshot/sc-info.jpg)
 
@@ -27,13 +46,19 @@ b. 转授权分发，这个技术最早貌似是360的快用用的这么一项�
 
 众所周知，苹果一向以安全著称，那么既然最后的ipa是通过拼接合成的，那么会不会在下载的过程中被篡改？或者加入一些其他的功能？其实苹果早就想到了这一点了。即使是应用商店下载的ipa也是带数字签名的。  
 
-ipa的签名信息分为两部分：1. ipa内所有文件的签名信息 2. 可执行文件的签名信息。
+ipa的签名信息分为两部分：
+1. ipa内所有文件的签名信息 
+2. 可执行文件的签名信息。
 
 ipa文件信息签名包括资源签名都位于Payload\EmojiUltimate.app\_CodeSignature 下的 CodeResources文件内：
 文件部分内容：
 ![](screenshot/coderesource.jpg)
 
 对应文件的额哈希值为sha1 + base64， 较新的ipa同时还会有sha256 + base64的签名方式。  
+![](screenshot/sha256.jpg)
+
+新版签名数据
+
 计算方法： 
 
     with open(filepath, 'rb') as f:
