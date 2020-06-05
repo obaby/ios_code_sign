@@ -1,0 +1,247 @@
+iOS 签名杂谈（二）
+====
+
+上一篇中提到替换SC-info后的ipa依旧可以安装，至于原因其实也很简单。仔细查看CodeResources文件，就知道原因了。文件内容如下：
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>files</key>
+	<dict>
+		<key>EmojiUltimateViewController.nib</key>
+		<data>
+		ifQreSMmB3Uft3K3EF1/RLPF/zw=
+		</data>
+		<key>EmojiViewController.nib</key>
+		<data>
+		UUTdU18Tz6Fl6x7E2aGYcRxpH3A=
+		</data>
+		<key>English.lproj/Localizable.strings</key>
+		<data>
+		53Ka23KM2gkM/XGA2/7hVBG5jfc=
+		</data>
+		<key>MainWindow.nib</key>
+		<data>
+		UshXxpapPiP6lBtWe18OpnMv+lM=
+		</data>
+		<key>PkgInfo</key>
+		<data>
+		n57qDP4tZfLD1rCS43W0B4LQjzE=
+		</data>
+		<key>RemoteConfig.plist</key>
+		<data>
+		rQXI2OqpnGVOk5+BmA/F++FnAG0=
+		</data>
+		<key>de.lproj/Localizable.strings</key>
+		<data>
+		MAGm4wWT2b8996eIiqcJna3Jj5s=
+		</data>
+		<key>emoji.plist</key>
+		<data>
+		aybwK3Wkthu1Gk7XmEzyjXmGVRQ=
+		</data>
+		<key>emoji_ultimate_copy_button.png</key>
+		<data>
+		M7AjbQ3xPvVnFz4PB6kviXR9ePQ=
+		</data>
+		<key>emoji_ultimate_copy_button_background.png</key>
+		<data>
+		e7CSi/nIgilN4Skvg4kTVD+Un3M=
+		</data>
+		<key>emoji_ultimate_icon.png</key>
+		<data>
+		QREK+EwPbUuOJZf7HrAtqDG1a3o=
+		</data>
+		<key>emoji_ultimate_icon@2x.png</key>
+		<data>
+		ZRcuLgqQkQmFRh43aBR8snXi9HU=
+		</data>
+		<key>emoji_ultimate_view_background.png</key>
+		<data>
+		SPCyOB9McmjA9cYYma6lkXe23WE=
+		</data>
+		<key>es.lproj/Localizable.strings</key>
+		<data>
+		3ob4L+OaiqknLRq7FoZRSBvUIyU=
+		</data>
+		<key>fr.lproj/Localizable.strings</key>
+		<data>
+		t0XzVIa6xqvmp5KagcjmB3xR7pg=
+		</data>
+		<key>it.lproj/Localizable.strings</key>
+		<data>
+		anq4JMyR1PBXVZf50ZSs1DZo/Yg=
+		</data>
+		<key>nl.lproj/Localizable.strings</key>
+		<data>
+		c8FRK0aJIXOqcXMwQnmDmw3fWBQ=
+		</data>
+		<key>pt.lproj/Localizable.strings</key>
+		<data>
+		p2Bu2xab7q2mOKGkS3ilMjlbkg4=
+		</data>
+		<key>zh-hans.lproj/Localizable.strings</key>
+		<data>
+		GDxwv2JLXA1oNSOphz4DndPk5LM=
+		</data>
+		<key>zh-hant.lproj/Localizable.strings</key>
+		<data>
+		c3wmlLx60JrmuFeU/hOcLdepdAM=
+		</data>
+	</dict>
+	<key>rules</key>
+	<dict>
+		<key>.*</key>
+		<true/>
+		<key>Info.plist</key>
+		<dict>
+			<key>omit</key>
+			<true/>
+			<key>weight</key>
+			<real>10</real>
+		</dict>
+		<key>ResourceRules.plist</key>
+		<dict>
+			<key>omit</key>
+			<true/>
+			<key>weight</key>
+			<real>100</real>
+		</dict>
+		<key>^SC_Info/.*\.sinf$</key>
+		<dict>
+			<key>omit</key>
+			<true/>
+			<key>weight</key>
+			<integer>10000</integer>
+		</dict>
+		<key>^SC_Info/.*\.supp$</key>
+		<dict>
+			<key>omit</key>
+			<true/>
+			<key>weight</key>
+			<integer>10000</integer>
+		</dict>
+	</dict>
+</dict>
+</plist>
+```
+该文件中除了定义的参与哈希运算的文件，同时还排除了一部分文件， 排除的文件列表就是对应的rules下的内容：
+```xml
+<key>rules</key>
+	<dict>
+		<key>.*</key>
+		<true/>
+		<key>Info.plist</key>
+		<dict>
+			<key>omit</key>
+			<true/>
+			<key>weight</key>
+			<real>10</real>
+		</dict>
+		<key>ResourceRules.plist</key>
+		<dict>
+			<key>omit</key>
+			<true/>
+			<key>weight</key>
+			<real>100</real>
+		</dict>
+		<key>^SC_Info/.*\.sinf$</key>
+		<dict>
+			<key>omit</key>
+			<true/>
+			<key>weight</key>
+			<integer>10000</integer>
+		</dict>
+		<key>^SC_Info/.*\.supp$</key>
+		<dict>
+			<key>omit</key>
+			<true/>
+			<key>weight</key>
+			<integer>10000</integer>
+		</dict>
+	</dict>
+```
+网上关于resource rules具体介绍的内容比较少，但是通过签名的表现以及下载行为可以知道，这个key定义下的所有文件都没有参与签名校验。对于新版的ipa内容会更复杂一下
+```xml
+		<key>PlugIns/PushService.appex/SC_Info/PushService.(sinf|supp|supf|supx)$</key>
+		<dict>
+			<key>omit</key>
+			<true/>
+			<key>weight</key>
+			<integer>10000</integer>
+		</dict>
+		<key>SC_Info/Edu901iPhone.(sinf|supp|supf|supx)$</key>
+		<dict>
+			<key>omit</key>
+			<true/>
+			<key>weight</key>
+			<integer>10000</integer>
+		</dict>
+		<key>^(.*/)?\.DS_Store$</key>
+		<dict>
+			<key>omit</key>
+			<true/>
+			<key>weight</key>
+			<real>2000</real>
+		</dict>
+		<key>^.*</key>
+		<true/>
+		<key>^.*\.lproj/</key>
+		<dict>
+			<key>optional</key>
+			<true/>
+			<key>weight</key>
+			<real>1000</real>
+		</dict>
+		<key>^.*\.lproj/locversion.plist$</key>
+		<dict>
+			<key>omit</key>
+			<true/>
+			<key>weight</key>
+			<real>1100</real>
+		</dict>
+		<key>^Base\.lproj/</key>
+		<dict>
+			<key>weight</key>
+			<real>1010</real>
+		</dict>
+		<key>^Info\.plist$</key>
+		<dict>
+			<key>omit</key>
+			<true/>
+			<key>weight</key>
+			<real>20</real>
+		</dict>
+		<key>^PkgInfo$</key>
+		<dict>
+			<key>omit</key>
+			<true/>
+			<key>weight</key>
+			<real>20</real>
+		</dict>
+		<key>^embedded\.provisionprofile$</key>
+		<dict>
+			<key>weight</key>
+			<real>20</real>
+		</dict>
+		<key>^version\.plist$</key>
+		<dict>
+			<key>weight</key>
+			<real>20</real>
+		</dict>
+	</dict>
+```
+一个完整的resourcerules样例：https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/HT5914/ResourceRules-ignoring-Scripts.plist  
+
+除了早期版本的额sc-info目录，新的ipa同时兼容了不同的Framework下的sc-info目录，并且多了个字段：^embedded\.provisionprofile$。 这个其实对应的是企业签名的mobile provison文件。  
+通过这个plist其实就知道那些文件是omit（忽略）的文件了。虽然对于appstore 下载的ipa文件来说这个字段对于我们没有什么用处。但是企业签名和个人签名这个文件的意义就凸显出来了。  
+控制了resourcerules也就意味着即使ipa已经签名过了，依旧可以修改里面的内容。  
+不过需要注意的是，苹果在最新的osx系统上已经不支持自定义resourcerules签名了。
+> Systems before OS X Mavericks 10.9 documented a signing feature (--resource-rules) to control which files in a bundle should be sealed by a code signature. This feature has been obsoleted for Mavericks. Code signatures made in Mavericks and later always seal all files in a bundle; there is no need to specify this explicitly any more. This also means that the Code Signing Resource Rules Path build setting in Xcode should no longer be used and should be left blank.
+
+> It is thus no longer possible to exclude parts of a bundle from the signature. Bundles should be treated as read-only once they have been signed.
+
+文章链接：https://developer.apple.com/library/archive/technotes/tn2206/_index.html#//apple_ref/doc/uid/DTS40007919-CH1-TNTAG401
+
