@@ -161,6 +161,8 @@ static void __attribute__((constructor)) initialize(void)
 @end
 
 ```
+测试app效果，app只有32位架构可以找个旧设备安装测试： 
+![coins](screenshot/coins.PNG)  
 
 > @author: obaby  
 > @license: (C) Copyright 2013-2020, obaby@mars.  
